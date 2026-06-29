@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 
 // 🔴 CHANGE THIS WHEN BACKEND IS LIVE
-const API = "http://localhost:5000";
+const API = "https://travelbuddy-backend-4w7o.onrender.com";
 
 export default function App() {
   const [isLogin, setIsLogin] = useState(true);
