@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-// 🔴 CHANGE THIS WHEN BACKEND IS LIVE
+// ✅ Live Backend URL
 const API = "https://travelbuddy-backend-4w7o.onrender.com";
 
 export default function App() {
@@ -11,7 +11,6 @@ export default function App() {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
-  const [aadhaar, setAadhaar] = useState("");
 
   // ================= REGISTER =================
   const register = async () => {
@@ -20,14 +19,19 @@ export default function App() {
         name,
         email,
         phone,
-        password,
-        aadhaar
+        password
       });
 
       alert("Registered Successfully");
       setIsLogin(true);
+
+      setName("");
+      setEmail("");
+      setPhone("");
+      setPassword("");
+
     } catch (err) {
-      alert("Register Failed");
+      alert(err.response?.data?.message || "Register Failed");
     }
   };
 
@@ -35,13 +39,14 @@ export default function App() {
   const login = async () => {
     try {
       const res = await axios.post(`${API}/login`, {
-        aadhaar,
+        phone,
         password
       });
 
       alert("Welcome " + res.data.user.name);
+
     } catch (err) {
-      alert("Login Failed");
+      alert(err.response?.data?.message || "Login Failed");
     }
   };
 
@@ -49,21 +54,22 @@ export default function App() {
     <div style={{ maxWidth: 400, margin: "auto", padding: 20 }}>
       <h1>🚀 TravelBuddy</h1>
 
-      {/* ================= LOGIN ================= */}
       {isLogin ? (
         <div>
           <h2>Login</h2>
 
           <input
-            placeholder="Aadhaar"
+            placeholder="Phone Number"
             style={inputStyle}
-            onChange={(e) => setAadhaar(e.target.value)}
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
           />
 
           <input
             type="password"
             placeholder="Password"
             style={inputStyle}
+            value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
 
@@ -76,38 +82,35 @@ export default function App() {
           </p>
         </div>
       ) : (
-        /* ================= REGISTER ================= */
         <div>
           <h2>Register</h2>
 
           <input
             placeholder="Name"
             style={inputStyle}
+            value={name}
             onChange={(e) => setName(e.target.value)}
           />
 
           <input
             placeholder="Email"
             style={inputStyle}
+            value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
 
           <input
             placeholder="Phone Number"
             style={inputStyle}
+            value={phone}
             onChange={(e) => setPhone(e.target.value)}
-          />
-
-          <input
-            placeholder="Aadhaar"
-            style={inputStyle}
-            onChange={(e) => setAadhaar(e.target.value)}
           />
 
           <input
             type="password"
             placeholder="Password"
             style={inputStyle}
+            value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
 
