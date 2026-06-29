@@ -1,90 +1,129 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import './App.css';
+import React, { useState } from "react";
+import axios from "axios";
 
-// यहाँ अपना नया बैकएंड लिंक डालें (अगर लिंक बदले तो बस यहाँ अपडेट करें)
-const API_BASE_URL = "https://your-new-backend-link.vercel.app"; 
+const API = "http://localhost:5000"; // बाद में deploy के बाद बदल देंगे
 
-function App() {
-  const [screen, setScreen] = useState('register');
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [aadhaar, setAadhaar] = useState(''); // [Aadhaar Redacted]
-  const [otp, setOtp] = useState('');
-  const [systemOtp, setSystemOtp] = useState('');
-  const [loggedInUser, setLoggedInUser] = useState(null);
-  const [myHistoryRecords, setMyHistoryRecords] = useState([]);
-  const [destination, setDestination] = useState('');
-  const [budget, setBudget] = useState('');
-  const [duration, setDuration] = useState('');
-  const [companion, setCompanion] = useState('solo');
-  const [genderPreference, setGenderPreference] = useState('any');
-  const [stayType, setStayType] = useState('hotel');
-  const [isPrivate, setIsPrivate] = useState(true);
-  const [matchedBuddies, setMatchedBuddies] = useState([]);
-  const [connectedPeople, setConnectedPeople] = useState({});
-  const [activeChat, setActiveChat] = useState(null);
+export default function App() {
+  const [screen, setScreen] = useState("register");
 
-  const fetchUserLockedHistory = async (userAadhaar) => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [aadhaar, setAadhaar] = useState("");
+
+  const [otp, setOtp] = useState("");
+
+  // ================= SEND OTP =================
+  const sendOtp = async () => {
     try {
-      const res = await axios.get(`${API_BASE_URL}/my-locked-history/${userAadhaar}`);
-      setMyHistoryRecords(res.data);
-    } catch (err) { console.log("History fetch error"); }
+      await axios.post(`${API}/send-otp`, { email });
+      alert("OTP sent");
+      setScreen("otp");
+    } catch (err) {
+      alert("OTP failed");
+    }
   };
 
-  const handleSendOtpRegister = (e) => {
-    e.preventDefault();
-    const generatedOtp = Math.floor(1000 + Math.random() * 9000).toString();
-    setSystemOtp(generatedOtp);
-    alert(`[Simulator] OTP is: ${generatedOtp}`);
-    setScreen('otp');
-  };
-
-  const handleVerifyAndRegister = async (e) => {
-    e.preventDefault();
-    if (otp !== systemOtp) return alert("❌ Wrong OTP!");
+  // ================= VERIFY OTP =================
+  const verifyOtp = async () => {
     try {
-      await axios.post(`${API_BASE_URL}/register`, { name, email, password, aadhaar });
-      setScreen('login');
-    } catch (err) { alert("Registration Failed! Check console."); }
-  };
-
-  const handleLogin = async (e) => {
-    e.preventDefault();
-    try {
-      const res = await axios.post(`${API_BASE_URL}/login`, { aadhaar, password });
-      setLoggedInUser(res.data.user);
-      await fetchUserLockedHistory(res.data.user.aadhaar);
-      setScreen('dashboard');
-    } catch (err) { alert("Invalid Credentials!"); }
-  };
-
-  const handleFindPartners = async (e) => {
-    e.preventDefault();
-    try {
-      await axios.post(`${API_BASE_URL}/save-travel-plan`, {
-        userAadhaar: loggedInUser.aadhaar, userName: loggedInUser.name,
-        destination, budget, duration, travelMode: 'train', stayType, companion, genderPreference, isPrivate
+      const res = await axios.post(`${API}/verify-otp`, {
+        email,
+        otp
       });
 
-      const res = await axios.post(`${API_BASE_URL}/find-matches`, {
-        destination, budget, duration, userAadhaar: loggedInUser.aadhaar
-      });
-      setMatchedBuddies(res.data);
-      setScreen('matches');
-    } catch (err) { alert("Error finding matches!"); }
+      if (res.data.success) {
+        alert("OTP Verified");
+        setScreen("register");
+      } else {
+        alert("Wrong OTP");
+      }
+    } catch (err) {
+      alert("Error verifying OTP");
+    }
   };
 
-  // ... (बाकी का HTML/JSX हिस्सा वैसा ही रहेगा जैसा आपने भेजा था)
+  // ================= REGISTER =================
+  const register = async () => {
+    try {
+      await axios.post(`${API}/register`, {
+        name,
+        email,
+        password,
+        aadhaar
+      });
+
+      alert("Registered Successfully");
+      setScreen("login");
+    } catch (err) {
+      alert("Register Failed");
+    }
+  };
+
+  // ================= LOGIN =================
+  const login = async () => {
+    try {
+      const res = await axios.post(`${API}/login`, {
+        aadhaar,
+        password
+      });
+
+      alert("Welcome " + res.data.user.name);
+      setScreen("dashboard");
+    } catch (err) {
+      alert("Login Failed");
+    }
+  };
+
   return (
-    <div className="app-wrapper">
-      {/* अपना पुराना JSX यहाँ नीचे रखें */}
-      <h1>TravelBuddy Connect</h1>
-      {/* ... */}
+    <div style={{ padding: 20, fontFamily: "Arial" }}>
+      <h1>🚀 TravelBuddy</h1>
+
+      {/* OTP SCREEN */}
+      {screen === "otp" && (
+        <div>
+          <h3>OTP Verification</h3>
+          <input
+            placeholder="Enter OTP"
+            onChange={(e) => setOtp(e.target.value)}
+          />
+          <button onClick={verifyOtp}>Verify OTP</button>
+        </div>
+      )}
+
+      {/* REGISTER */}
+      {screen === "register" && (
+        <div>
+          <h3>Register</h3>
+
+          <input placeholder="Name" onChange={(e) => setName(e.target.value)} />
+          <input placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
+          <input placeholder="Password" type="password" onChange={(e) => setPassword(e.target.value)} />
+          <input placeholder="Aadhaar" onChange={(e) => setAadhaar(e.target.value)} />
+
+          <button onClick={sendOtp}>Send OTP</button>
+          <button onClick={register}>Register</button>
+        </div>
+      )}
+
+      {/* LOGIN */}
+      {screen === "login" && (
+        <div>
+          <h3>Login</h3>
+
+          <input placeholder="Aadhaar" onChange={(e) => setAadhaar(e.target.value)} />
+          <input placeholder="Password" type="password" onChange={(e) => setPassword(e.target.value)} />
+
+          <button onClick={login}>Login</button>
+        </div>
+      )}
+
+      {/* DASHBOARD */}
+      {screen === "dashboard" && (
+        <div>
+          <h2>🎉 Welcome to TravelBuddy Dashboard</h2>
+        </div>
+      )}
     </div>
   );
 }
-
-export default App;
