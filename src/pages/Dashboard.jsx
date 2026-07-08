@@ -41,8 +41,24 @@ export default function Dashboard() {
         <h3>Dashboard</h3>
 
         <p>
-          Next step me profile fill karna hoga.
-        </p>
+  Please complete your travel profile to start finding travel partners.
+</p>
+
+<Link
+  to="/profile"
+  style={{
+    display: "inline-block",
+    marginTop: "20px",
+    background: "#0d6efd",
+    color: "white",
+    padding: "12px 20px",
+    borderRadius: "8px",
+    textDecoration: "none",
+    fontWeight: "bold"
+  }}
+>
+  Complete Profile →
+</Link>
 
       </div>
 
