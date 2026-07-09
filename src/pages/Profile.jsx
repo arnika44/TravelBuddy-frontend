@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 const API = "https://travelbuddy-backend-4w7o.onrender.com";
 
@@ -22,6 +22,22 @@ export default function Profile() {
       [e.target.name]: e.target.value
     });
   };
+  useEffect(() => {
+
+  const user = JSON.parse(localStorage.getItem("user"));
+
+  if (!user) return;
+
+  axios
+    .get(`${API}/get-profile/${user.name}`)
+    .then((res) => {
+      setForm(res.data);
+    })
+    .catch(() => {
+      console.log("No profile found");
+    });
+
+}, []);
   const saveProfile = async () => {
 
   try {

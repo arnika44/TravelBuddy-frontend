@@ -28,6 +28,8 @@ export default function Dashboard() {
 
         <p><Link to="/history" style={link}>📜 History</Link></p>
 
+        <p><Link to="/find-partners" style={link}>🤝 Find Partners</Link></p>
+
         <p><Link to="/change-password" style={link}>🔒 Change Password</Link></p>
 
       </div>
