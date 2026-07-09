@@ -42,7 +42,12 @@ export default function Profile() {
 
   try {
 
-    await axios.post(`${API}/save-profile`, form);
+    const user = JSON.parse(localStorage.getItem("user"));
+
+    await axios.post(`${API}/save-profile`, {
+        ...form,
+        userPhone: user.phone
+    });
 
     alert("Profile Saved Successfully ✅");
 

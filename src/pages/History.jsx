@@ -9,8 +9,10 @@ export default function History() {
 
   useEffect(() => {
 
+    const user = JSON.parse(localStorage.getItem("user"));
+
     axios
-      .get(`${API}/history`)
+      .get(`${API}/history/${user.phone}`)
       .then((res) => {
         setProfiles(res.data);
       })
