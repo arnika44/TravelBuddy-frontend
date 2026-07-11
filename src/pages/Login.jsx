@@ -9,6 +9,7 @@ export default function Login() {
 
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
   const login = async () => {
     try {
@@ -43,13 +44,32 @@ export default function Login() {
         style={input}
       />
 
-      <input
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        style={input}
-      />
+        <div style={{ position: "relative", width: "100%", marginBottom: "10px" }}>
+
+  <input
+    type={showPassword ? "text" : "password"}
+    placeholder="Password"
+    value={password}
+    onChange={(e) => setPassword(e.target.value)}
+    style={input}
+  />
+
+  <span
+    onClick={() => setShowPassword(!showPassword)}
+    style={{
+      position: "absolute",
+      right: "10px",
+      top: "50%",
+      transform: "translateY(-50%)",
+      cursor: "pointer",
+      userSelect: "none",
+      fontSize: "18px"
+    }}
+  >
+    {showPassword ? "🙈" : "👁️"}
+  </span>
+
+</div>
 
       <button style={button} onClick={login}>
         Login
