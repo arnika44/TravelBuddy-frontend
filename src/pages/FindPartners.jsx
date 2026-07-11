@@ -14,7 +14,7 @@ export default function FindPartners() {
     if (!user) return;
 
     axios
-      .get(`${API}/get-profile/${user.name}`)
+      .get(`${API}/get-profile/${user.phone}`)
       .then((res) => {
 
         const profile = res.data;

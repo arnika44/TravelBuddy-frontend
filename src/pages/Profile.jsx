@@ -29,7 +29,7 @@ export default function Profile() {
   if (!user) return;
 
   axios
-    .get(`${API}/get-profile/${user.name}`)
+    .get(`${API}/get-profile/${user.phone}`)
     .then((res) => {
       setForm(res.data);
     })
