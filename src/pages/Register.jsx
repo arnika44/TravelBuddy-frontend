@@ -12,21 +12,31 @@ export default function Register() {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
   const register = async () => {
 
     try {
 
-      await axios.post(`${API}/register`, {
-        name,
-        email,
-        phone,
-        password
-      });
+      const res = await axios.post(`${API}/register`, {
+  name,
+  email,
+  phone,
+  password
+});
 
-      alert("Registered Successfully");
+localStorage.setItem(
+  "user",
+  JSON.stringify({
+    name,
+    phone,
+    email
+  })
+);
 
-      navigate("/");
+alert("Registered Successfully");
+
+navigate("/dashboard");
 
     } catch (err) {
 
@@ -65,13 +75,32 @@ export default function Register() {
         style={input}
       />
 
-      <input
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={(e)=>setPassword(e.target.value)}
-        style={input}
-      />
+      <div style={{ position: "relative", width: "100%", marginBottom: "10px" }}>
+
+  <input
+    type={showPassword ? "text" : "password"}
+    placeholder="Password"
+    value={password}
+    onChange={(e)=>setPassword(e.target.value)}
+    style={input}
+  />
+
+  <span
+    onClick={() => setShowPassword(!showPassword)}
+    style={{
+      position: "absolute",
+      right: "10px",
+      top: "50%",
+      transform: "translateY(-50%)",
+      cursor: "pointer",
+      userSelect: "none",
+      fontSize: "18px"
+    }}
+  >
+    {showPassword ? "🙈" : "👁️"}
+  </span>
+
+</div>
 
       <button style={button} onClick={register}>
         Register
