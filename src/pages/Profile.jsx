@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import Navbar from "../components/Navbar";
+
 const API = "https://travelbuddy-backend-4w7o.onrender.com";
 
 export default function Profile() {
@@ -62,10 +64,16 @@ export default function Profile() {
 };
 
   return (
+  <div>
+
+    <Navbar />
+
     <div
       style={{
         maxWidth: "700px",
-        margin: "30px auto",
+        marginTop: "20px",
+        marginLeft: "auto",
+        marginRight: "auto",
         padding: "20px",
         border: "1px solid #ddd",
         borderRadius: "10px",
@@ -215,8 +223,11 @@ export default function Profile() {
 >
   Save Profile
 </button>
+
     </div>
-  );
+
+  </div>
+);
 }
 const label = {
   display: "block",

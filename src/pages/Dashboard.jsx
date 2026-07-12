@@ -1,4 +1,4 @@
-import Sidebar from "../components/Sidebar";
+import Navbar from "../components/Navbar";
 import { Link } from "react-router-dom";
 
 export default function Dashboard() {
@@ -9,15 +9,13 @@ export default function Dashboard() {
 
     <div style={{display:"flex"}}>
 
-      {/* Sidebar */}
+      {/* navbar */}
 
-      <Sidebar />
+      <Navbar />
 
       <div
   style={{
-    marginLeft: "270px",
-    padding: "30px",
-    flex: 1
+    padding: "30px"
   }}
 >
 
