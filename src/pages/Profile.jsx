@@ -66,7 +66,7 @@ export default function Profile() {
   return (
   <div>
 
-    <Navbar />
+    <Navbar title="My Profile" />
 
     <div
       style={{
@@ -80,9 +80,6 @@ export default function Profile() {
         boxShadow: "0 0 10px rgba(0,0,0,0.1)"
       }}
     >
-      <h2 style={{ textAlign: "center", marginBottom: "30px" }}>
-  Travel Profile
-</h2>
 
 <label style={label}>Full Name *</label>
 <input

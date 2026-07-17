@@ -7,15 +7,15 @@ export default function Dashboard() {
 
   return (
 
-    <div style={{display:"flex"}}>
+    <div>
 
       {/* navbar */}
 
-      <Navbar />
+      <Navbar title="Dashboard" />
 
       <div
   style={{
-    padding: "30px"
+    padding: "20px"
   }}
 >
 

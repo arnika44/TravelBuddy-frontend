@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Navbar from "../components/Navbar";
 
 const API = "https://travelbuddy-backend-4w7o.onrender.com";
 
@@ -44,6 +45,10 @@ export default function FindPartners() {
   }, []);
 
   return (
+  <div>
+
+    <Navbar title="Find Partners" />
+
     <div style={{ padding: "20px" }}>
       <h2>Find Travel Partners</h2>
 
@@ -70,6 +75,8 @@ export default function FindPartners() {
           </div>
         ))
       )}
-    </div>
+        </div>
+
+  </div>
   );
 }

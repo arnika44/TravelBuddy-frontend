@@ -1,7 +1,25 @@
-export default function ChangePassword(){
+import Navbar from "../components/Navbar";
 
-return(
-<h1>Change Password Page</h1>
-);
+export default function ChangePassword() {
+
+  return (
+    <div>
+
+      <Navbar title="Change Password" />
+
+      <div
+        style={{
+          padding: "20px"
+        }}
+      >
+        <h2>Change Password</h2>
+
+        <p>
+          Change Password feature will be added soon.
+        </p>
+      </div>
+
+    </div>
+  );
 
 }

@@ -1,4 +1,6 @@
+import Navbar from "../components/Navbar";
 import { useEffect, useState } from "react";
+
 import axios from "axios";
 
 const API = "https://travelbuddy-backend-4w7o.onrender.com";
@@ -23,8 +25,11 @@ export default function History() {
   }, []);
 
   return (
+  <div>
 
-    <div style={{ padding: "30px" }}>
+    <Navbar title="History" />
+
+    <div style={{ padding: "20px" }}>
 
       <h2>Travel History</h2>
 
@@ -73,8 +78,10 @@ export default function History() {
 
       )}
 
-    </div>
+        </div>
+
+  </div>
 
   );
 
-}                 
+}
