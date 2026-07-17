@@ -18,7 +18,7 @@ export default function Register() {
 
     try {
 
-      const res = await axios.post(`${API}/register`, {
+      await axios.post(`${API}/register`, {
   name,
   email,
   phone,
