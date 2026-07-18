@@ -6,6 +6,9 @@ const API = "https://travelbuddy-backend-4w7o.onrender.com";
 
 export default function Profile() {
 
+  const [profilePhoto, setProfilePhoto] = useState(null);
+  const [idProof, setIdProof] = useState(null);
+
   const [form, setForm] = useState({
     fullName: "",
     age: "",
@@ -47,11 +50,41 @@ export default function Profile() {
     const user = JSON.parse(localStorage.getItem("user"));
 
     const { _id, __v, ...profileData } = form;
+    let photoUrl = "";
+let idProofUrl = "";
+
+if (profilePhoto) {
+
+  const photoData = new FormData();
+  photoData.append("photo", profilePhoto);
+
+  const photoRes = await axios.post(
+    `${API}/upload-profile-photo`,
+    photoData
+  );
+
+  photoUrl = photoRes.data.imageUrl;
+}
+
+if (idProof) {
+
+  const idData = new FormData();
+  idData.append("photo", idProof);
+
+  const idRes = await axios.post(
+    `${API}/upload-profile-photo`,
+    idData
+  );
+
+  idProofUrl = idRes.data.imageUrl;
+}
 
     await axios.post(`${API}/save-profile`, {
-      ...profileData,
-      userPhone: user.phone
-    });
+  ...profileData,
+  userPhone: user.phone,
+  profilePhoto: photoUrl,
+  idProof: idProofUrl
+});
 
     alert("Profile Saved Successfully ✅");
 
@@ -191,10 +224,10 @@ export default function Profile() {
 )}
 
 <label style={label}>Profile Photo</label>
-
 <input
   type="file"
   accept="image/*"
+  onChange={(e) => setProfilePhoto(e.target.files[0])}
   style={input}
 />
 
@@ -202,6 +235,7 @@ export default function Profile() {
 <input
   type="file"
   accept="image/*"
+  onChange={(e) => setIdProof(e.target.files[0])}
   style={input}
 />
 
