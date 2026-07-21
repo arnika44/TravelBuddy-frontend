@@ -72,6 +72,43 @@ export default function FindPartners() {
             <p><b>Budget:</b> ₹{p.budget}</p>
             <p><b>Days:</b> {p.days}</p>
             <p><b>Stay:</b> {p.stay}</p>
+            <p style={{ color: "red", fontWeight: "bold" }}>
+  TEST BUTTON
+</p>
+            <button
+  onClick={async () => {
+
+    const user = JSON.parse(localStorage.getItem("user"));
+    console.log("Partner:", p);
+
+    try {
+
+      const res = await axios.post(`${API}/send-request`, {
+        senderPhone: user.phone,
+        receiverPhone: p.userPhone,
+      });
+
+      alert(res.data.message);
+
+    } catch (err) {
+
+      alert("Failed to send request");
+
+    }
+
+  }}
+  style={{
+    padding: "10px 18px",
+    background: "#0d6efd",
+    color: "white",
+    border: "none",
+    borderRadius: "6px",
+    cursor: "pointer",
+    marginTop: "10px"
+  }}
+>
+  Send Request
+</button>
           </div>
         ))
       )}
