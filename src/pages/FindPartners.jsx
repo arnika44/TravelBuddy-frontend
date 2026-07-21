@@ -129,31 +129,75 @@ export default function FindPartners() {
 {p.requestStatus === "received" && (
   <>
     <button
-      style={{
-        padding: "10px 18px",
-        background: "green",
-        color: "white",
-        border: "none",
-        borderRadius: "6px",
-        marginRight: "10px",
-        marginTop: "10px"
-      }}
-    >
-      Accept
-    </button>
+  onClick={async () => {
+
+    const user = JSON.parse(localStorage.getItem("user"));
+
+    try {
+
+      const res = await axios.post(`${API}/accept-request`, {
+        senderPhone: p.userPhone,
+        receiverPhone: user.phone
+      });
+
+      alert(res.data.message);
+
+      window.location.reload();
+
+    } catch (err) {
+
+      alert("Accept Failed");
+
+    }
+
+  }}
+  style={{
+    padding: "10px 18px",
+    background: "green",
+    color: "white",
+    border: "none",
+    borderRadius: "6px",
+    marginRight: "10px",
+    marginTop: "10px"
+  }}
+>
+  Accept
+</button>
 
     <button
-      style={{
-        padding: "10px 18px",
-        background: "red",
-        color: "white",
-        border: "none",
-        borderRadius: "6px",
-        marginTop: "10px"
-      }}
-    >
-      Reject
-    </button>
+  onClick={async () => {
+
+    const user = JSON.parse(localStorage.getItem("user"));
+
+    try {
+
+      const res = await axios.post(`${API}/reject-request`, {
+        senderPhone: p.userPhone,
+        receiverPhone: user.phone
+      });
+
+      alert(res.data.message);
+
+      window.location.reload();
+
+    } catch (err) {
+
+      alert("Reject Failed");
+
+    }
+
+  }}
+  style={{
+    padding: "10px 18px",
+    background: "red",
+    color: "white",
+    border: "none",
+    borderRadius: "6px",
+    marginTop: "10px"
+  }}
+>
+  Reject
+</button>
   </>
 )}
 
