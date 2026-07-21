@@ -72,43 +72,106 @@ export default function FindPartners() {
             <p><b>Budget:</b> ₹{p.budget}</p>
             <p><b>Days:</b> {p.days}</p>
             <p><b>Stay:</b> {p.stay}</p>
-            <p style={{ color: "red", fontWeight: "bold" }}>
-  TEST BUTTON
-</p>
-            <button
-  onClick={async () => {
+            {p.requestStatus === "none" && (
+  <button
+    onClick={async () => {
 
-    const user = JSON.parse(localStorage.getItem("user"));
-    console.log("Partner:", p);
+      const user = JSON.parse(localStorage.getItem("user"));
 
-    try {
+      try {
 
-      const res = await axios.post(`${API}/send-request`, {
-        senderPhone: user.phone,
-        receiverPhone: p.userPhone,
-      });
+        const res = await axios.post(`${API}/send-request`, {
+          senderPhone: user.phone,
+          receiverPhone: p.userPhone,
+        });
 
-      alert(res.data.message);
+        alert(res.data.message);
 
-    } catch (err) {
+        window.location.reload();
 
-      alert("Failed to send request");
+      } catch (err) {
 
-    }
+        alert("Failed to send request");
 
-  }}
-  style={{
-    padding: "10px 18px",
-    background: "#0d6efd",
-    color: "white",
-    border: "none",
-    borderRadius: "6px",
-    cursor: "pointer",
-    marginTop: "10px"
-  }}
->
-  Send Request
-</button>
+      }
+
+    }}
+    style={{
+      padding: "10px 18px",
+      background: "#0d6efd",
+      color: "white",
+      border: "none",
+      borderRadius: "6px",
+      cursor: "pointer",
+      marginTop: "10px"
+    }}
+  >
+    Send Request
+  </button>
+)}
+
+{p.requestStatus === "sent" && (
+  <button
+    disabled
+    style={{
+      padding: "10px 18px",
+      background: "gray",
+      color: "white",
+      border: "none",
+      borderRadius: "6px",
+      marginTop: "10px"
+    }}
+  >
+    Request Sent
+  </button>
+)}
+
+{p.requestStatus === "received" && (
+  <>
+    <button
+      style={{
+        padding: "10px 18px",
+        background: "green",
+        color: "white",
+        border: "none",
+        borderRadius: "6px",
+        marginRight: "10px",
+        marginTop: "10px"
+      }}
+    >
+      Accept
+    </button>
+
+    <button
+      style={{
+        padding: "10px 18px",
+        background: "red",
+        color: "white",
+        border: "none",
+        borderRadius: "6px",
+        marginTop: "10px"
+      }}
+    >
+      Reject
+    </button>
+  </>
+)}
+
+{p.requestStatus === "matched" && (
+  <button
+    disabled
+    style={{
+      padding: "10px 18px",
+      background: "green",
+      color: "white",
+      border: "none",
+      borderRadius: "6px",
+      marginTop: "10px"
+    }}
+  >
+    Matched
+  </button>
+)}
           </div>
         ))
       )}
