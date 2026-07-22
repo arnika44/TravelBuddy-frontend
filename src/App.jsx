@@ -8,6 +8,7 @@ import History from "./pages/History";
 import FindPartners from "./pages/FindPartners";
 import ChangePassword from "./pages/ChangePassword";
 import Chat from "./pages/Chat";
+import Chats from "./pages/Chats";
 
 export default function App() {
   return (
@@ -21,7 +22,8 @@ export default function App() {
       <Route path="/change-password" element={<ChangePassword />} />
       <Route path="/received-requests" element={<ReceivedRequests />} />
       <Route path="/chat" element={<Chat />} />
-      
+      <Route path="/chats" element={<Chats />} />
+
     </Routes>
   );
 }

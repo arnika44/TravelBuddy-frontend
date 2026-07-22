@@ -47,13 +47,34 @@ const logout = () => {
         </h2>
 
         <div
-          style={{
-            width: "40px",
-            height: "40px",
-            borderRadius: "50%",
-            background: "#2563eb"
-          }}
-        ></div>
+  style={{
+    display: "flex",
+    alignItems: "center",
+    gap: "15px"
+  }}
+>
+
+  <Link
+    to="/chats"
+    style={{
+      color: "white",
+      textDecoration: "none",
+      fontSize: "24px"
+    }}
+  >
+    💬
+  </Link>
+
+  <div
+    style={{
+      width: "40px",
+      height: "40px",
+      borderRadius: "50%",
+      background: "#2563eb"
+    }}
+  ></div>
+
+</div>
       </div>
 
       <h2
@@ -101,6 +122,12 @@ const logout = () => {
         🤝 Find Partners
       </Link>
     </p>
+
+    <p>
+  <Link to="/chats" style={link} onClick={() => setOpen(false)}>
+    💬 Chats
+  </Link>
+</p>
 
     <p>
       <Link to="/change-password" style={link} onClick={() => setOpen(false)}>
