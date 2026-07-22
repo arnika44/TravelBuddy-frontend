@@ -203,17 +203,24 @@ export default function FindPartners() {
 
 {p.requestStatus === "matched" && (
   <button
-    disabled
+    onClick={() => {
+
+      localStorage.setItem("chatPartner", JSON.stringify(p));
+
+      window.location.href = "/chat";
+
+    }}
     style={{
       padding: "10px 18px",
       background: "green",
       color: "white",
       border: "none",
       borderRadius: "6px",
-      marginTop: "10px"
+      marginTop: "10px",
+      cursor: "pointer"
     }}
   >
-    Matched
+    💬 Open Chat
   </button>
 )}
           </div>
