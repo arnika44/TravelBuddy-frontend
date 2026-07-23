@@ -9,6 +9,7 @@ import FindPartners from "./pages/FindPartners";
 import ChangePassword from "./pages/ChangePassword";
 import Chat from "./pages/Chat";
 import Chats from "./pages/Chats";
+import ForgotPassword from "./pages/ForgotPassword";
 
 export default function App() {
   return (
@@ -23,6 +24,7 @@ export default function App() {
       <Route path="/received-requests" element={<ReceivedRequests />} />
       <Route path="/chat" element={<Chat />} />
       <Route path="/chats" element={<Chats />} />
+      <Route path="/forgot-password" element={<ForgotPassword />} />
 
     </Routes>
   );
