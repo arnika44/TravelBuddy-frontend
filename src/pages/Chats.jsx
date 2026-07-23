@@ -13,7 +13,7 @@ export default function Chats() {
   useEffect(() => {
 
     axios
-      .get(`${API}/chat-list/${user.phone}`)
+      .get(`${API}/matched-users/${user.phone}`)
       .then((res) => {
 
         setChatList(res.data);
