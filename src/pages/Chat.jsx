@@ -42,9 +42,9 @@ export default function Chat() {
     try {
 
       await axios.post(`${API}/send-message`, {
-        senderPhone: user.phone,
-        receiverPhone: partner.phone,
-        message
+  sender: user.phone,
+  receiver: partner.phone,
+  message
       });
 
       setMessage("");
@@ -73,7 +73,7 @@ export default function Chat() {
             key={m._id}
             style={{
               textAlign:
-                m.senderPhone === user.phone ? "right" : "left",
+  m.sender === user.phone ? "right" : "left",
               marginBottom: "10px"
             }}
           >
