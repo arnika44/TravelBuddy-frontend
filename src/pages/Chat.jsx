@@ -9,6 +9,8 @@ export default function Chat() {
   const user = JSON.parse(localStorage.getItem("user"));
   const partner = JSON.parse(localStorage.getItem("chatPartner"));
 
+  console.log("CHAT PARTNER:", partner);
+
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
 
