@@ -13,7 +13,7 @@ export default function Chat() {
   const [messages, setMessages] = useState([]);
 
   const loadMessages = () => {
-
+  
     axios
       .get(`${API}/messages/${user.phone}/${partner.phone}`)
       .then((res) => {
@@ -40,6 +40,11 @@ export default function Chat() {
     if (!message.trim()) return;
 
     try {
+    console.log({
+  senderPhone: user.phone,
+  receiverPhone: partner.phone,
+  message
+});
 
       await axios.post(`${API}/send-message`, {
   sender: user.phone,
