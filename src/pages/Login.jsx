@@ -7,14 +7,14 @@ const API = "https://travelbuddy-backend-4w7o.onrender.com";
 export default function Login() {
   const navigate = useNavigate();
 
-  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
   const login = async () => {
     try {
       const res = await axios.post(`${API}/login`, {
-        phone,
+        email,
         password,
       });
 
@@ -38,9 +38,9 @@ export default function Login() {
       <h2>Login</h2>
 
       <input
-        placeholder="Phone Number"
-        value={phone}
-        onChange={(e) => setPhone(e.target.value)}
+        placeholder="Email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
         style={input}
       />
 
