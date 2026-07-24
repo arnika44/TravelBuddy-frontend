@@ -15,7 +15,7 @@ export default function Chat() {
   const loadMessages = () => {
 
     axios
-      .get(`${API}/messages/${user.phone}/${partner.userPhone}`)
+      .get(`${API}/messages/${user.phone}/${partner.phone}`)
       .then((res) => {
 
         setMessages(res.data);
@@ -43,7 +43,7 @@ export default function Chat() {
 
       await axios.post(`${API}/send-message`, {
         senderPhone: user.phone,
-        receiverPhone: partner.userPhone,
+        receiverPhone: partner.phone,
         message
       });
 
@@ -81,11 +81,11 @@ export default function Chat() {
               style={{
                 display: "inline-block",
                 background:
-                  m.senderPhone === user.phone
+                  m.sender === user.phone
                     ? "#0d6efd"
                     : "#ddd",
                 color:
-                  m.senderPhone === user.phone
+                  m.sender === user.phone
                     ? "white"
                     : "black",
                 padding: "10px",
