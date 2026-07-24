@@ -47,8 +47,8 @@ export default function Chat() {
 });
 
       await axios.post(`${API}/send-message`, {
-  sender: user.phone,
-  receiver: partner.phone,
+  senderPhone: user.phone,
+  receiverPhone: partner.phone,
   message
       });
 
