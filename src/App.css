@@ -1,4 +1,4 @@
-/* --- HUMAN-CONNECTION PREMIUM TRAVEL THEME --- */
+                                                                                                                                               /* --- HUMAN-CONNECTION PREMIUM TRAVEL THEME --- */
 :root {
   --bg-dark-overlay: rgba(10, 15, 26, 0.78); /* Soft dark layer that makes text very readable */
   --bg-card: rgba(15, 23, 42, 0.7);
@@ -66,8 +66,15 @@ body {
   padding: 15px 25px;
 }
 .menu-toggle-btn { background: none; border: none; color: var(--accent-neon); font-size: 26px; cursor: pointer; margin-right: 15px; }
-.nav-title { margin: 0; font-size: 18px; font-weight: 700; background: linear-gradient(to right, var(--accent-neon), var(--accent-pink)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-
+.nav-title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+  background: linear-gradient(to right, var(--accent-neon), var(--accent-pink));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 /* LAYOUTS */
 .side-menu {
   position: fixed; top: 0; left: -310px; width: 290px; height: 100%;
@@ -91,10 +98,15 @@ body {
 }
 .page-card { max-width: 680px; }
 
-.auth-card h2, .page-card h3 {
-  margin-top: 0; text-align: center; font-size: 24px;
+.auth-card h2,
+.page-card h3 {
+  margin-top: 0;
+  text-align: center;
+  font-size: 24px;
   background: linear-gradient(to right, #00f2fe, #4facfe);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 .input-group { display: flex; flex-direction: column; margin-bottom: 16px; }
 .input-group label { font-size: 13px; color: #cbd5e1; margin-bottom: 5px; }
@@ -125,4 +137,4 @@ body {
 .chat-input-bar input { flex: 1; border: none; padding: 12px; background: transparent; color: white; outline: none; }
 .chat-input-bar button { background: var(--accent-neon); color: black; border: none; padding: 0 15px; font-weight: bold; }
 .link-text { color: var(--accent-neon); cursor: pointer; text-align: center; margin-top: 15px; font-size: 14px; }
-.otp-box { text-align: center; font-size: 24px; letter-spacing: 8px; background: rgba(0,0,0,0.4) !important; color: var(--accent-neon) !important; }
+.otp-box { text-align: center; font-size: 24px; letter-spacing: 8px; background: rgba(0,0,0,0.4) !important; color: var(--accent-neon) !important; }                                                                                                          
