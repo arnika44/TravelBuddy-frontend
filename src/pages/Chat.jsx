@@ -9,17 +9,13 @@ export default function Chat() {
   const user = JSON.parse(localStorage.getItem("user"));
   const partner = JSON.parse(localStorage.getItem("chatPartner"));
 
-  console.log("PARTNER DATA:", partner);
-
-  console.log("CHAT PARTNER:", partner);
-
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
 
   const loadMessages = () => {
   
     axios
-      .get(`${API}/messages/${user.phone}/${partner.phone}`)
+      .get(`${API}/messages/${user.phone}/${partner.userPhone}`)
       .then((res) => {
 
         setMessages(res.data);
@@ -46,13 +42,13 @@ export default function Chat() {
     try {
     console.log({
   senderPhone: user.phone,
-  receiverPhone: partner.phone,
+  receiverPhone: partner.userPhone,
   message
 });
 
       await axios.post(`${API}/send-message`, {
   senderPhone: user.phone,
-  receiverPhone: partner.phone,
+  receiverPhone: partner.userPhone,
   message
       });
 
