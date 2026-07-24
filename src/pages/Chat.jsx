@@ -53,9 +53,11 @@ export default function Chat() {
 
     } catch (err) {
 
-      alert("Message Failed");
+  console.log(err.response?.data);
 
-    }
+  alert(err.response?.data?.message || err.message);
+
+}
 
   };
 
@@ -73,7 +75,7 @@ export default function Chat() {
             key={m._id}
             style={{
               textAlign:
-  m.sender === user.phone ? "right" : "left",
+  m.senderPhone === user.phone ? "right" : "left",
               marginBottom: "10px"
             }}
           >
@@ -81,11 +83,11 @@ export default function Chat() {
               style={{
                 display: "inline-block",
                 background:
-                  m.sender === user.phone
+  m.senderPhone === user.phone
                     ? "#0d6efd"
                     : "#ddd",
                 color:
-                  m.sender === user.phone
+  m.senderPhone === user.phone
                     ? "white"
                     : "black",
                 padding: "10px",
